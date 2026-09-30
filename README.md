@@ -1,1 +1,1 @@
-DnD-Styled-Terminal-Game
+DnD inspired terminal game. Created by Travis Young.
