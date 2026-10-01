@@ -11,4 +11,10 @@ void onSettings();
 
 void onQuit();
 
+void onGraphics();
+
+void onDifficulty();
+
+void onGameSpeed();
+
 #endif
