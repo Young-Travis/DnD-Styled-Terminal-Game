@@ -1,11 +1,7 @@
-#include <iostream>
-#include <vector>
-#include <string>
-#include "Character.hpp"
-#include "Character_creator.hpp"
+#include "main_menu.hpp"
 
 using namespace std;
 
 int main(void){
-    askForName();
+    generateMainMenu();
 }
