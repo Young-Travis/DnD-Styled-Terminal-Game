@@ -36,7 +36,9 @@ public:
         }
     }
 
-    void assignClass(Character_class c_class);
+    void addStat(int stat, int amount){
+        stats[stat] += amount;
+    }
 
     void createStats(){
         for (int i = 0; i < stats.size(); i++){
@@ -56,8 +58,6 @@ public:
         }
     }
 
-    void onDealDamage(npc target, int damage);
-
     void printHealth(){
         cout << char_name << " Health: " << current_hp << "/" << max_hp << endl;
     }
@@ -65,6 +65,9 @@ public:
     void onDead(){
         cout << char_name << " has died!";
     }
+    //prototypes go here
+    void assignClass(Character_class c_class);
+    void onDealDamage(npc target, int damage);
 
 };
 
