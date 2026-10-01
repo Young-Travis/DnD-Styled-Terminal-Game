@@ -18,51 +18,50 @@ void clearTerminal(int milliseconds)
 int getInt()
 {
     int response;
-
     while (!(cin >> response))
     {
         cout << "Invalid input. Please enter a number: ";
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
-
     return response;
 }
 
 float getFloat()
 {
     float response;
-
     while (!(cin >> response))
     {
         cout << "Invalid input. Please enter a number: ";
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
-
     return response;
 }
 
 bool getYesNo()
 {
-    char response;
+    string response;
 
     while (true)
     {
         cin >> response;
 
-        if (response == 'y' || response == 'Y')
+        if (response == "y" || response == "Y" ||
+            response == "yes" || response == "Yes" ||
+            response == "YES")
         {
             return true;
         }
-        else if (response == 'n' || response == 'N')
+
+        if (response == "n" || response == "N" ||
+            response == "no" || response == "No" ||
+            response == "NO")
         {
             return false;
         }
-        else
-        {
-            cout << "Invalid input. Please enter Y or N: ";
-        }
+
+        cout << "Invalid input. Please enter Y or N: ";
     }
 }
 

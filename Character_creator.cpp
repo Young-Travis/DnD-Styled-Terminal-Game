@@ -11,10 +11,11 @@ void askForName(){
     while (true){
         cout << "What is your name?" << endl;
         cin >> response;
-        cout << "Ah, so your name is " << response << "?" << endl;
+        cout << "Ah, so your name is " << response << "? (Y/N)" << endl;
         if (getYesNo()){
             break;
         }
+        clearTerminal(250);
     }
     assignClass(response);
 }
@@ -62,39 +63,23 @@ void assignClass(string name){
 
 void addToStats(Character& player, int amount){
     int response;
-    cout << "Choose a stat to increase by " << amount << endl;
-    for (int i = 0; i < player.stat_names.size(); i++){
-        cout << i+1 << ") " << player.stat_names[i] << endl;
-    }
-        do{
-        response = getInt();
-        switch (response){
-            case 1:
-                player.addStat(0, amount);
-                break;
-            case 2:
-                player.addStat(1, amount);
-                break;
-            case 3:
-                player.addStat(2, amount);
-                break;
-            case 4:
-                player.addStat(3, amount);
-                break;
-            case 5:
-                player.addStat(4, amount);
-                break;
-            case 6:
-                player.addStat(5, amount);
-                break;
-            case 7:
-                player.addStat(6, amount);
-                break;
-            default:
-                cout << "Invalid choice. Please enter a number in the list: ";
-                continue;
+    while (true){
+        cout << "Choose a stat to increase by " << amount << endl;
+        for (int i = 0; i < player.stat_names.size(); i++){
+            cout << i+1 << ") " << player.stat_names[i] << endl;
         }
-        break;
+        response = getInt();
+        if (response >= 1 && response <= player.stat_names.size())
+        {
+            player.addStat(response - 1, amount);
+            break;
+        }
+        else
+        {
+            cout << "Invalid choice. Please enter a number in the list: " << endl;
+            cout << "Please wait a moment for the terminal to clear." << endl;
+            clearTerminal(2000);
+        }
     }
-    while (true);
+    clearTerminal(250);
 }
