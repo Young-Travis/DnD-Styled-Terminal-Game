@@ -1,6 +1,6 @@
-#include "Character.hpp"
-#include "npc.hpp"
-#include "Character_class.hpp"
+#include "hpp/Character.hpp"
+#include "hpp/npc.hpp"
+#include "hpp/Character_class.hpp"
 
 using namespace std;
 

@@ -1,7 +1,7 @@
 #include <iostream>
-#include "main_menu.hpp"
-#include "Character_creator.hpp"
-#include "general_utility.hpp"
+#include "hpp/main_menu.hpp"
+#include "hpp/Character_creator.hpp"
+#include "hpp/general_utility.hpp"
 
 using namespace std;
 

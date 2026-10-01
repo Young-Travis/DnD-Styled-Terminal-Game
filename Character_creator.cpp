@@ -1,8 +1,8 @@
 #include <iostream>
 #include <string>
-#include "Character_creator.hpp"
-#include "Character_class.hpp"
-#include "general_utility.hpp"
+#include "hpp/Character_creator.hpp"
+#include "hpp/Character_class.hpp"
+#include "hpp/general_utility.hpp"
 
 using namespace std;
 
