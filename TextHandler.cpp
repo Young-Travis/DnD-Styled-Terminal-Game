@@ -53,12 +53,7 @@ TextHandler::~TextHandler()
     TTF_Quit();
 }
 
-void TextHandler::draw(
-    const std::string& text,
-    float x,
-    float y
-)
-{
+void TextHandler::draw(const std::string& text, float x, float y){
     if (font == nullptr){
         return;
     }

@@ -1,13 +1,7 @@
 #include "hpp/ChoiceMenu.hpp"
 #include "hpp/TextHandler.hpp"
 
-ChoiceMenu::ChoiceMenu(
-    SDL_Renderer* renderer,
-    TextHandler* text,
-    float x,
-    float y
-)
-{
+ChoiceMenu::ChoiceMenu(SDL_Renderer* renderer, TextHandler* text, float x, float y){
     this->renderer = renderer;
     this->text = text;
 
@@ -17,8 +11,7 @@ ChoiceMenu::ChoiceMenu(
     selected = 0;
 }
 
-void ChoiceMenu::setChoices(const std::vector<std::string>& choices)
-{
+void ChoiceMenu::setChoices(const std::vector<std::string>& choices){
     this->choices = choices;
 
     selected = 0;

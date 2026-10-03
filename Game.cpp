@@ -29,8 +29,22 @@ void Game::run()
             handleInput(event);
         }
 
-        SDL_SetRenderDrawColor(renderer, 25, 25, 25, 255);
         SDL_RenderClear(renderer);
+
+        switch (currentState){
+            case GameState::MainMenu:
+                mainMenu.update();
+                break;
+        }
+
+        switch (currentState){
+            case GameState::MainMenu:
+                mainMenu.draw();
+                break;
+        }
+
+        SDL_SetRenderDrawColor(renderer, 25, 25, 25, 255);
+        
         SDL_RenderPresent(renderer);
     }
 }

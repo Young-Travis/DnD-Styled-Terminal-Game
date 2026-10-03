@@ -1,8 +1,8 @@
 #include <iostream>
 #include <SDL3/SDL.h>
 #include "hpp/MainMenu.hpp"
-#include "hpp/CharacterCreator.hpp"
-#include "hpp/general_utility.hpp"
+#include "hpp/TextHandler.hpp"
+#include "hpp/ChoiceMenu.hpp"
 
 using namespace std;
 
@@ -29,4 +29,28 @@ void MainMenu::handleInput(SDL_Event& event){
             cout << "Enter pressed" << endl;
         }
     }
+}
+
+void MainMenu::update(){
+    cout << "Test Update" << endl;
+}
+
+void MainMenu::draw(){
+    TextHandler text(renderer);
+    ChoiceMenu choices(
+        renderer,
+        &text,
+        50,
+        50
+    );
+
+    //text.draw(string, x, y,)
+    text.draw("Welcome to the game!", 0, 0);
+    choices.setChoices(
+        {"New Game",
+        "Load Game",
+        "Settings",
+        "Quit"}
+    );
+    choices.draw();
 }
