@@ -4,7 +4,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "Character_class.hpp"
+#include "CharacterClass.hpp"
 #include "Weapon.hpp"
 #include "Armor.hpp"
 

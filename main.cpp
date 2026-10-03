@@ -1,37 +1,47 @@
-#include "hpp/main_menu.hpp"
+#include <SDL3/SDL.h>
+#include <iostream>
 
-//includes for testing
-#include "hpp/Armor.hpp"
-#include "hpp/Character_class.hpp"
-#include "hpp/Character.hpp"
-#include "hpp/general_utility.hpp"
-#include "hpp/Item.hpp"
-#include "hpp/main_menu.hpp"
-#include "hpp/npc.hpp"
-#include "hpp/Weapon.hpp"
+#include "hpp/Game.hpp"
 
 using namespace std;
 
-void functionForTesting(){
-    Character p1("Travis");
-    LeatherArmor armor;
-    Battleaxe weapon;
-    Gold gold;
+int main(){
+    if (!SDL_Init(SDL_INIT_VIDEO)){
+        cout << "SDL_Init failed: " << SDL_GetError() << endl;
+        return 1;
+    }
 
-    p1.createStats();
-    
-    p1.printStats();
-    
-    p1.printModifiers();
+    SDL_Window* window = SDL_CreateWindow(
+        "Travis' Game",
+        800,
+        600,
+        0
+    );
 
-    p1.equipItem(armor);
+    if (window == nullptr){
+        cout << "SDL_CreateWindow failed: " << SDL_GetError() << endl;
+        SDL_Quit();
+        return 1;
+    }
 
-    p1.printStats();
-    //p1.equip_weapon->printStats();
-    p1.printEquipped();
-}
+    SDL_Renderer* renderer = SDL_CreateRenderer(window, nullptr);
 
-int main(void){
-    functionForTesting();
-    //generateMainMenu();
+    if (renderer == nullptr){
+        cout << "SDL_CreateRenderer failed: " << SDL_GetError() << endl;
+        SDL_DestroyWindow(window);
+        SDL_Quit();
+
+        return 1;
+    }
+
+    Game game(renderer);
+
+    game.run();
+
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
+
+    SDL_Quit();
+
+    return 0;
 }

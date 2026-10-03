@@ -1,12 +1,37 @@
 #include <iostream>
 #include <string>
-#include "hpp/Character_creator.hpp"
-#include "hpp/Character_class.hpp"
+#include "hpp/CharacterCreator.hpp"
+#include "hpp/CharacterClass.hpp"
 #include "hpp/general_utility.hpp"
 
 using namespace std;
 
-void askForName(){
+CharacterCreator::CharacterCreator(SDL_Renderer* r){
+    renderer = r;
+}
+
+void CharacterCreator::handleInput(SDL_Event& event){
+    if (event.type == SDL_EVENT_KEY_DOWN)
+    {
+        if (event.key.key == SDLK_UP)
+        {
+            selected--;
+        }
+
+        if (event.key.key == SDLK_DOWN)
+        {
+            selected++;
+        }
+
+        if (event.key.key == SDLK_RETURN)
+        {
+            cout << "Enter pressed" << endl;
+        }
+    }
+}
+
+
+void CharacterCreator::askForName(){
     string response;
     while (true){
         cout << "What is your name?" << endl;
@@ -20,7 +45,7 @@ void askForName(){
     assignClass(response);
 }
 
-void assignClass(string name){
+void CharacterCreator::assignClass(string name){
     int response;
     Character player(name);
     Character_class player_class;
@@ -61,7 +86,7 @@ void assignClass(string name){
     clearTerminal(1000);
 }
 
-void addToStats(Character& player, int amount){
+void CharacterCreator::addToStats(Character& player, int amount){
     int response;
     while (true){
         cout << "Choose a stat to increase by " << amount << endl;
