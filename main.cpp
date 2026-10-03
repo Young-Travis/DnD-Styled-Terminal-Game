@@ -15,6 +15,8 @@ using namespace std;
 void functionForTesting(){
     Character p1("Travis");
     LeatherArmor armor;
+    Battleaxe weapon;
+    Gold gold;
 
     p1.createStats();
     
@@ -25,6 +27,8 @@ void functionForTesting(){
     p1.equipItem(armor);
 
     p1.printStats();
+    //p1.equip_weapon->printStats();
+    p1.printEquipped();
 }
 
 int main(void){

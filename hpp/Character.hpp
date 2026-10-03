@@ -33,6 +33,8 @@ public:
 
     void printModifiers();
 
+    void printEquipped();
+
     void addStat(int stat, int amount);
 
     void createStats();

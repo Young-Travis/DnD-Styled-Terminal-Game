@@ -28,6 +28,21 @@ void Character::printModifiers(){
     }
 }
 
+void Character::printEquipped(){
+    if (equip_armor == nullptr){
+        cout << char_name << " has no armor equipped." << endl;
+    }
+    else{
+        cout << char_name << " has " << equip_armor->item_name << " equipped." << endl;
+    }
+    if (equip_weapon == nullptr){
+        cout << char_name << " has no weapon equipped." << endl;
+    }
+    else{
+        cout << char_name << " has " << equip_weapon->item_name << " equipped." << endl;
+    }
+}
+
 void Character::addStat(int stat, int amount){
     stats[stat] += amount;
 }
@@ -68,12 +83,12 @@ void Character::onDead(){
 
 void Character::calculateArmorClass(){
     if (equip_armor == nullptr){
-        cout << char_name << " has no armor equipped." << endl;
+        //cout << char_name << " has no armor equipped." << endl;
         armor_class = 10 + (modifiers[1]);
     }
     else{
         int temp_mod = modifiers[1];
-        cout << char_name << " has " << equip_armor->item_name << " equipped." << endl;
+        //cout << char_name << " has " << equip_armor->item_name << " equipped." << endl;
         if (equip_armor->armor_type == "Light"){
             armor_class = equip_armor->base_ac + temp_mod;
         }
@@ -106,7 +121,6 @@ void Character::equipItem(Item& item){
         cout << "Item is not equippable. Try another item." << endl;
     }
     else{
-        cout << char_name << " has tried to equip " << item.item_name << endl;
         if (Armor* armor = dynamic_cast<Armor*>(&item)) {
             equip_armor = armor;
             calculateArmorClass();
@@ -114,5 +128,6 @@ void Character::equipItem(Item& item){
         else if (Weapon* weapon = dynamic_cast<Weapon*>(&item)) {
             equip_weapon = weapon;
         }
+        cout << char_name << " has equipped their " << item.item_name << "." << endl;
     }
 }
