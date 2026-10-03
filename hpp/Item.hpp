@@ -13,6 +13,8 @@ public:
     int sell_price;
     bool equippable = false;
 
+    virtual ~Item() = default;
+
     void onSell();
 };
 

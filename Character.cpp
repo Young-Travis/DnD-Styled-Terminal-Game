@@ -1,6 +1,7 @@
 #include "hpp/Character.hpp"
 #include "hpp/npc.hpp"
 #include "hpp/Character_class.hpp"
+#include "hpp/Item.hpp"
 
 using namespace std;
 
@@ -10,7 +11,6 @@ Character::Character(string name){
     //printStats();
 }
 
-
 void Character::printName(){
     cout << char_name << endl;
 }
@@ -18,6 +18,13 @@ void Character::printName(){
 void Character::printStats(){
     for (int i = 0; i < stats.size(); i++){
         cout << char_name << "'s " << stat_names[i] << ": " << stats[i] << endl;
+    }
+    cout << "Armor Class: " << armor_class << endl;
+}
+
+void Character::printModifiers(){
+    for (int i = 0; i < stats.size(); i++){
+        cout << char_name << "'s " << stat_names[i] << " modifier: " << modifiers[i] << endl;
     }
 }
 
@@ -29,6 +36,14 @@ void Character::createStats(){
     for (int i = 0; i < stats.size(); i++){
         cout << "Enter a value for " << char_name << "'s " << stat_names[i] << ": ";
         cin >> stats[i];
+    }
+    calculateModifiers();
+    calculateArmorClass();
+}
+
+void Character::calculateModifiers(){
+    for (int i = 0; i < stats.size(); i++){
+        modifiers[i] = (stats[i] - 10) / 2;
     }
 }
 
@@ -51,6 +66,29 @@ void Character::onDead(){
     cout << char_name << " has died!";
 }
 
+void Character::calculateArmorClass(){
+    if (equip_armor == nullptr){
+        cout << char_name << " has no armor equipped." << endl;
+        armor_class = 10 + (modifiers[1]);
+    }
+    else{
+        int temp_mod = modifiers[1];
+        cout << char_name << " has " << equip_armor->item_name << " equipped." << endl;
+        if (equip_armor->armor_type == "Light"){
+            armor_class = equip_armor->base_ac + temp_mod;
+        }
+        else if (equip_armor->armor_type == "Medium"){
+            if (temp_mod > 2){
+                temp_mod = 2;
+            }
+            armor_class = equip_armor->base_ac + temp_mod;
+        }
+        else{
+            armor_class = equip_armor->base_ac;
+        }
+    }
+}
+
 void Character::onDealDamage(npc target, int damage){
     target.onTakeDamage(damage);
 }
@@ -61,4 +99,20 @@ void Character::assignClass(Character_class c_class){
 
     stats = char_class.base_stats;
     printStats();
+}
+
+void Character::equipItem(Item& item){
+    if (!item.equippable){
+        cout << "Item is not equippable. Try another item." << endl;
+    }
+    else{
+        cout << char_name << " has tried to equip " << item.item_name << endl;
+        if (Armor* armor = dynamic_cast<Armor*>(&item)) {
+            equip_armor = armor;
+            calculateArmorClass();
+        }
+        else if (Weapon* weapon = dynamic_cast<Weapon*>(&item)) {
+            equip_weapon = weapon;
+        }
+    }
 }

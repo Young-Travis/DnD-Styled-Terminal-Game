@@ -1,10 +1,12 @@
 #ifndef CHARACTER_HPP
 #define CHARACTER_HPP
 
-#include "Character_class.hpp"
 #include <iostream>
 #include <string>
 #include <vector>
+#include "Character_class.hpp"
+#include "Weapon.hpp"
+#include "Armor.hpp"
 
 using namespace std;
 
@@ -14,6 +16,8 @@ class Character{
 public:
     string char_name;
     Character_class char_class;
+    Armor* equip_armor = nullptr;
+    Weapon* equip_weapon = nullptr;
     int armor_class;
     int max_hp = 100;
     int current_hp = max_hp;
@@ -27,9 +31,13 @@ public:
 
     void printStats();
 
+    void printModifiers();
+
     void addStat(int stat, int amount);
 
     void createStats();
+
+    void calculateModifiers();
 
     void onTakeDamage(int damage);
 
@@ -42,6 +50,7 @@ public:
     //prototypes that require other classes go here
     void assignClass(Character_class c_class);
     void onDealDamage(npc target, int damage);
+    void equipItem(Item& item);
 
 };
 
