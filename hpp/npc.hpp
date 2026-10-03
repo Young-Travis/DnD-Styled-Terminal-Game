@@ -13,27 +13,13 @@ public:
     int current_hp = max_hp;
     string npc_name;
 
-    void onTakeDamage(int damage){
-        current_hp -= damage;
-        if (current_hp <= 0){
-            current_hp = 0;
-            onDead();
-        }
-        else{
-            cout << npc_name << " Took " << damage << " damage!" << endl;
-            printHealth();
-        }
-    }
+    void onTakeDamage(int damage);
 
     void onDealDamage(Character target, int damage);
 
-    void printHealth(){
-        cout << npc_name << " Health: " << current_hp << "/" << max_hp << endl;
-    }
+    void printHealth();
 
-    void onDead(){
-        cout << npc_name << " has died!" << endl;
-    }
+    void onDead();
 
 };
 
