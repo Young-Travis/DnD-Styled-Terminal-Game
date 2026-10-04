@@ -5,9 +5,10 @@
 
 using namespace std;
 
-Game::Game(SDL_Renderer* r) : mainMenu(r), settings(r), characterCreator(r){
+Game::Game(SDL_Window* w, SDL_Renderer* r) : window(w), mainMenu(r), settings(r), characterCreator(r){
     renderer = r;
     currentState = GameState::MainMenu;
+    SDL_StartTextInput(window);
 }
 
 void Game::run()
@@ -45,6 +46,10 @@ void Game::run()
                 }
                 break;
 
+            case GameState::CharacterCreator:
+                characterCreator.update();
+                break;
+
             case GameState::Quit:
                 running = false;
                 break;
@@ -58,8 +63,11 @@ void Game::run()
             case GameState::Settings:
                 settings.draw();
                 break;
+            
+            case GameState::CharacterCreator:
+                characterCreator.draw();
+                break;
         }
-        
         SDL_RenderPresent(renderer);
     }
 }

@@ -29,6 +29,7 @@ void MainMenu::handleInput(SDL_Event& event){
             switch (choices.getSelected()){
                 case 0:
                     cout << "New Game Selected" << endl;
+                    requestedState = GameState::CharacterCreator;
                     break;
                 case 1:
                     cout << "Load Game Selected" << endl;

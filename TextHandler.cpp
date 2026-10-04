@@ -13,22 +13,15 @@ TextHandler::TextHandler(SDL_Renderer* renderer){
         return;
     }
 
-    std::cout << "SDL_ttf initialized successfully."
-              << std::endl;
+    std::cout << "SDL_ttf initialized successfully." << std::endl;
 
-    font = TTF_OpenFont(
-        "font.ttf",
-        32
-    );
+    font = TTF_OpenFont("font.ttf", 32);
 
     if (font == nullptr){
-        std::cout << "TTF_OpenFont failed: "
-                  << SDL_GetError()
-                  << std::endl;
+        std::cout << "TTF_OpenFont failed: " << SDL_GetError() << std::endl;
     }
     else {
-        std::cout << "Font loaded successfully."
-                  << std::endl;
+        std::cout << "Font loaded successfully." << std::endl;
     }
 
     current_text = "";
@@ -73,13 +66,8 @@ void TextHandler::update(){
 
     Uint64 current_time = SDL_GetTicks();
 
-    if (
-        characters_to_show < current_text.length()
-        &&
-        current_time - last_character_time >= character_delay
-    ){
+    if (characters_to_show < current_text.length() && current_time - last_character_time >= character_delay){
         characters_to_show++;
-
         last_character_time = current_time;
     }
 }

@@ -34,7 +34,7 @@ int main(){
         return 1;
     }
 
-    Game game(renderer);
+    Game game(window, renderer);
 
     game.run();
 

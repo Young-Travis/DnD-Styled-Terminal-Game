@@ -21,6 +21,7 @@ add_executable(DnDGame
     npc.cpp
     Settings.cpp
     TextHandler.cpp
+    TextInput.cpp
     Weapon.cpp
 )
 

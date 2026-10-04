@@ -10,6 +10,7 @@
 class Game{
 public:
     bool running = false;
+    SDL_Window* window;
     SDL_Renderer* renderer;
     GameState currentState;
 
@@ -17,7 +18,7 @@ public:
     Settings settings;
     CharacterCreator characterCreator;
 
-    Game(SDL_Renderer* r);
+    Game(SDL_Window* w, SDL_Renderer* r);
 
     void run();
 
