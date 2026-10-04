@@ -35,7 +35,9 @@ public:
 
     ~TextHandler();
 
-    void draw(const std::string& text, float x, float y);
+    void setText(const std::string& text, float x, float y);
+
+    void draw();
 
     void drawInstant(const std::string& text, float x, float y);
 

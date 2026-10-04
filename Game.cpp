@@ -33,6 +33,7 @@ void Game::run()
         switch (currentState){
             case GameState::MainMenu:
                 mainMenu.update();
+                running = !mainMenu.quit;
                 break;
         }
 

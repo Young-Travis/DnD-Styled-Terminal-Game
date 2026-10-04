@@ -8,6 +8,7 @@
 class MainMenu{
 public:
     int selected = 0;
+    bool quit = false;
     TextHandler text;
     ChoiceMenu choices;
 

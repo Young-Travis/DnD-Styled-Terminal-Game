@@ -1,8 +1,7 @@
 #include "hpp/TextHandler.hpp"
 #include <iostream>
 
-TextHandler::TextHandler(SDL_Renderer* renderer)
-{
+TextHandler::TextHandler(SDL_Renderer* renderer){
     this->renderer = renderer;
 
     if (!TTF_Init()){
@@ -44,8 +43,7 @@ TextHandler::TextHandler(SDL_Renderer* renderer)
     character_delay = 50;
 }
 
-TextHandler::~TextHandler()
-{
+TextHandler::~TextHandler(){
     if (font != nullptr){
         TTF_CloseFont(font);
     }
@@ -53,7 +51,7 @@ TextHandler::~TextHandler()
     TTF_Quit();
 }
 
-void TextHandler::draw(const std::string& text, float x, float y){
+void TextHandler::setText(const std::string& text, float x, float y){
     if (font == nullptr){
         return;
     }
@@ -68,8 +66,7 @@ void TextHandler::draw(const std::string& text, float x, float y){
     last_character_time = SDL_GetTicks();
 }
 
-void TextHandler::update()
-{
+void TextHandler::update(){
     if (font == nullptr){
         return;
     }
@@ -85,44 +82,6 @@ void TextHandler::update()
 
         last_character_time = current_time;
     }
-
-    std::string visible_text =
-        current_text.substr(
-            0,
-            characters_to_show
-        );
-
-    float current_y = text_y;
-
-    std::string current_line;
-
-    for (char character : visible_text){
-
-        if (character == '\n'){
-
-            drawLine(
-                current_line,
-                text_x,
-                current_y
-            );
-
-            current_line = "";
-
-            current_y += 40;
-
-        }
-        else {
-
-            current_line += character;
-
-        }
-    }
-
-    drawLine(
-        current_line,
-        text_x,
-        current_y
-    );
 }
 
 void TextHandler::drawLine(const std::string& text, float x, float y){
@@ -180,11 +139,52 @@ void TextHandler::drawLine(const std::string& text, float x, float y){
     SDL_DestroySurface(surface);
 }
 
-void TextHandler::drawInstant(const std::string& text, float x, float y)
-{
+void TextHandler::drawInstant(const std::string& text, float x, float y){
     if (font == nullptr){
         return;
     }
 
     drawLine(text, x, y);
+}
+
+void TextHandler::draw(){
+    if (font == nullptr){
+        return;
+    }
+
+    std::string visible_text =
+        current_text.substr(
+            0,
+            characters_to_show
+        );
+
+    float current_y = text_y;
+
+    std::string current_line;
+
+    for (char character : visible_text){
+
+        if (character == '\n'){
+
+            drawLine(
+                current_line,
+                text_x,
+                current_y
+            );
+
+            current_line = "";
+
+            current_y += 40;
+        }
+        else {
+
+            current_line += character;
+        }
+    }
+
+    drawLine(
+        current_line,
+        text_x,
+        current_y
+    );
 }
