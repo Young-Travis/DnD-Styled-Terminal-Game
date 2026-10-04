@@ -1,5 +1,7 @@
 #include <iostream>
+#include <optional>
 #include <SDL3/SDL.h>
+#include "hpp/GameState.hpp"
 #include "hpp/MainMenu.hpp"
 #include "hpp/TextHandler.hpp"
 #include "hpp/ChoiceMenu.hpp"
@@ -15,7 +17,6 @@ MainMenu::MainMenu(SDL_Renderer* r) : text(r), choices(r, &text, 50, 50){
         "Settings",
         "Quit"}
     );
-    cout << "Main Menu Called" << endl;
 }
 
 void MainMenu::handleInput(SDL_Event& event){
@@ -34,10 +35,11 @@ void MainMenu::handleInput(SDL_Event& event){
                     break;
                 case 2:
                     cout << "Settings Selected" << endl;
+                    requestedState = GameState::Settings;
                     break;
                 case 3:
                     cout << "Quit Selected" << endl;
-                    quit = true;
+                    requestedState = GameState::Quit;
                     break;
             }
         }
@@ -53,4 +55,13 @@ void MainMenu::draw(){
     //text.draw(string, x, y)
     text.draw();
     choices.draw();
+}
+
+std::optional<GameState> MainMenu::getRequestedState()
+{
+    std::optional<GameState> requested = requestedState;
+
+    requestedState.reset();
+
+    return requested;
 }

@@ -3,14 +3,9 @@
 
 #include <SDL3/SDL.h>
 #include "MainMenu.hpp"
+#include "Settings.hpp"
 #include "CharacterCreator.hpp"
-
-
-enum class GameState{
-    MainMenu,
-    CharacterCreator
-};
-
+#include "GameState.hpp"
 
 class Game{
 public:
@@ -19,6 +14,7 @@ public:
     GameState currentState;
 
     MainMenu mainMenu;
+    Settings settings;
     CharacterCreator characterCreator;
 
     Game(SDL_Renderer* r);

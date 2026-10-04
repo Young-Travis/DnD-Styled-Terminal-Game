@@ -19,6 +19,7 @@ add_executable(DnDGame
     MainMenu.cpp
     main.cpp
     npc.cpp
+    Settings.cpp
     TextHandler.cpp
     Weapon.cpp
 )

@@ -5,7 +5,7 @@
 
 using namespace std;
 
-Game::Game(SDL_Renderer* r) : mainMenu(r), characterCreator(r){
+Game::Game(SDL_Renderer* r) : mainMenu(r), settings(r), characterCreator(r){
     renderer = r;
     currentState = GameState::MainMenu;
 }
@@ -33,13 +33,30 @@ void Game::run()
         switch (currentState){
             case GameState::MainMenu:
                 mainMenu.update();
-                running = !mainMenu.quit;
+                if (auto requestedState = mainMenu.getRequestedState()){
+                    currentState = *requestedState;
+                }
+                break;
+
+            case GameState::Settings:
+                settings.update();
+                if (auto requestedState = settings.getRequestedState()){
+                    currentState = *requestedState;
+                }
+                break;
+
+            case GameState::Quit:
+                running = false;
                 break;
         }
 
         switch (currentState){
             case GameState::MainMenu:
                 mainMenu.draw();
+                break;
+
+            case GameState::Settings:
+                settings.draw();
                 break;
         }
         
@@ -54,11 +71,15 @@ void Game::handleInput(SDL_Event& event)
             mainMenu.handleInput(event);
             break;
 
+        case GameState::Settings:
+            settings.handleInput(event);
+            break;
+
         case GameState::CharacterCreator:
             characterCreator.handleInput(event);
             break;
 
-        /*
+        /* Example of Future implementation
             case GameState::Battle:
             battle.handleInput(event);
             break;

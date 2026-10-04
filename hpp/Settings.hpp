@@ -1,28 +1,25 @@
-#ifndef MAIN_MENU_HPP
-#define MAIN_MENU_HPP
+#ifndef SETTINGS_HPP
+#define SETTINGS_HPP
 
-#include <SDL3/SDL.h>
 #include <optional>
+#include "GameState.hpp"
 #include "TextHandler.hpp"
 #include "ChoiceMenu.hpp"
-#include "GameState.hpp"
+
 
 using namespace std;
 
-class MainMenu{
+class Settings{
 public:
-    optional<GameState> requestedState;
     TextHandler text;
     ChoiceMenu choices;
+    optional<GameState> requestedState;
 
-    MainMenu(SDL_Renderer* r);
+    Settings(SDL_Renderer* r);
 
     void handleInput(SDL_Event& event);
-
     void update();
-
     void draw();
-
     optional<GameState> getRequestedState();
 
 private:
