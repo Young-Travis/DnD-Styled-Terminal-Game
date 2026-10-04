@@ -8,12 +8,21 @@
 #include "TextHandler.hpp"
 #include "TextInput.hpp"
 
+enum class CreatorStep{
+    Name,
+    VerifyName,
+    ChooseClass
+};
+
 class CharacterCreator{
 public:
-    int selected = 0;
+    CreatorStep currentStep = CreatorStep::Name;
     ChoiceMenu choices;
     TextHandler text;
     TextInput textInput;
+
+    //character stuff
+    string name;
 
     GameState requestedState;
 
@@ -24,6 +33,12 @@ public:
     void update();
 
     void draw();
+
+    void choosingName();
+
+    void verifyName();
+
+    void chooseClass();
 
 private:
     SDL_Renderer* renderer;

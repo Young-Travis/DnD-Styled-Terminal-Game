@@ -20,10 +20,7 @@ void TextInput::draw(){
 }
 
 void TextInput::handleInput(SDL_Event& event){
-    cout << "Event Received: " << event.type << endl;
- 
     if (event.type == SDL_EVENT_TEXT_INPUT && text.size() < maxLength){
-        cout << "Text input: " << event.text.text << endl;
         text += event.text.text;
     }
     
@@ -33,8 +30,13 @@ void TextInput::handleInput(SDL_Event& event){
                 text.pop_back();
             }
         }
-        if (event.key.key == SDLK_RETURN){
-            cout << "Finished typing name" << endl;
-        }
     }
+}
+
+void TextInput::reset(){
+    text = "";
+}
+
+string TextInput::getText(){
+    return text;
 }

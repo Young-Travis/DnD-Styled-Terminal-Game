@@ -8,16 +8,10 @@
 
 using namespace std;
 
-MainMenu::MainMenu(SDL_Renderer* r) : text(r), choices(r, &text, 50, 50){
+MainMenu::MainMenu(SDL_Renderer* r) : text(r), choices(r, &text){
     renderer = r;
     text.setText("Welcome to the game!", 0, 0);
-    choices.setChoices(
-        {"New Game",
-        "Load Game",
-        "Settings",
-        "Quit"}
-    );
-}
+    choices.setChoices({"New Game", "Load Game", "Settings", "Quit"}, 50, 50);}
 
 void MainMenu::handleInput(SDL_Event& event){
     choices.handleInput(event);
