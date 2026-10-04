@@ -6,12 +6,13 @@
 
 using namespace std;
 
-MainMenu::MainMenu(SDL_Renderer* r){
+MainMenu::MainMenu(SDL_Renderer* r) : text(r), choices(r, &text, 50, 50){
     renderer = r;
     cout << "Main Menu Called" << endl;
 }
 
 void MainMenu::handleInput(SDL_Event& event){
+    choices.handleInput(event);
     if (event.type == SDL_EVENT_KEY_DOWN)
     {
         if (event.key.key == SDLK_UP)
@@ -36,16 +37,8 @@ void MainMenu::update(){
 }
 
 void MainMenu::draw(){
-    TextHandler text(renderer);
-    ChoiceMenu choices(
-        renderer,
-        &text,
-        50,
-        50
-    );
-
-    //text.draw(string, x, y,)
-    text.draw("Welcome to the game!", 0, 0);
+    //text.draw(string, x, y)
+    text.drawInstant("Welcome to the game!", 0, 0);
     choices.setChoices(
         {"New Game",
         "Load Game",

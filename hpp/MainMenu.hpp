@@ -2,10 +2,14 @@
 #define MAIN_MENU_HPP
 
 #include <SDL3/SDL.h>
+#include "TextHandler.hpp"
+#include "ChoiceMenu.hpp"
 
 class MainMenu{
 public:
     int selected = 0;
+    TextHandler text;
+    ChoiceMenu choices;
 
     MainMenu(SDL_Renderer* r);
 

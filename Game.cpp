@@ -3,7 +3,6 @@
 #include "hpp/MainMenu.hpp"
 #include "hpp/CharacterCreator.hpp"
 
-
 using namespace std;
 
 Game::Game(SDL_Renderer* r) : mainMenu(r), characterCreator(r){
@@ -28,7 +27,7 @@ void Game::run()
 
             handleInput(event);
         }
-
+        SDL_SetRenderDrawColor(renderer, 25, 25, 25, 255);
         SDL_RenderClear(renderer);
 
         switch (currentState){
@@ -42,8 +41,6 @@ void Game::run()
                 mainMenu.draw();
                 break;
         }
-
-        SDL_SetRenderDrawColor(renderer, 25, 25, 25, 255);
         
         SDL_RenderPresent(renderer);
     }
