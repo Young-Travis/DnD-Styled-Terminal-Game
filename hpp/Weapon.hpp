@@ -6,9 +6,9 @@
 
 class Weapon : public Item{
 public:
-    string weapon_type;
-    int num_of_rolls;
-    int max_of_each_dice;
+    string weaponType;
+    int numOfRolls;
+    int maxOfEachDice;
 
     Weapon(){
         equippable = true;
@@ -20,13 +20,13 @@ public:
 class Battleaxe : public Weapon{
 public:
     Battleaxe(){
-        item_name = "Battleaxe";
-        weapon_type = "martial";
-        item_weight = 4.0f;
-        buy_price = 10;
+        itemName = "Battleaxe";
+        weaponType = "martial";
+        itemWeight = 4.0f;
+        buyPrice = 10;
 
-        num_of_rolls = 1;
-        max_of_each_dice = 8;
+        numOfRolls = 1;
+        maxOfEachDice = 8;
     }
 };
 

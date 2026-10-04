@@ -14,16 +14,16 @@ class npc;
 
 class Character{
 public:
-    string char_name;
-    Character_class char_class;
-    Armor* equip_armor = nullptr;
-    Weapon* equip_weapon = nullptr;
-    int armor_class;
-    int max_hp = 100;
-    int current_hp = max_hp;
+    string charName;
+    CharacterClass charClass;
+    Armor* equipArmor = nullptr;
+    Weapon* equipWeapon = nullptr;
+    int armorClass;
+    int maxHp = 100;
+    int currentHp = maxHp;
     vector<int> stats = {0,0,0,0,0,0};
     vector<int> modifiers = {0,0,0,0,0,0};
-    vector<string> stat_names = {"Constitution", "Dexterity", "Strength", "Intelligence", "Wisdom", "Charisma"};
+    vector<string> statNames = {"Constitution", "Dexterity", "Strength", "Intelligence", "Wisdom", "Charisma"};
 
     Character(string name);
 
@@ -50,7 +50,7 @@ public:
     void calculateArmorClass();
 
     //prototypes that require other classes go here
-    void assignClass(Character_class c_class);
+    void assignClass(CharacterClass cClass);
     void onDealDamage(npc target, int damage);
     void equipItem(Item& item);
 

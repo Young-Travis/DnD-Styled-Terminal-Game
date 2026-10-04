@@ -7,10 +7,10 @@ using namespace std;
 
 class Item{
 public:
-    string item_name;
-    float item_weight;
-    int buy_price;
-    int sell_price;
+    string itemName;
+    float itemWeight;
+    int buyPrice;
+    int sellPrice;
     bool equippable = false;
 
     virtual ~Item() = default;
@@ -21,8 +21,8 @@ public:
 class Gold : public Item{
 public:
     Gold(){
-        item_name = "Gold";
-        item_weight = 0.02f;
+        itemName = "Gold";
+        itemWeight = 0.02f;
     }
 };
 

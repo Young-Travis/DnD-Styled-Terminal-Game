@@ -4,5 +4,5 @@
 using namespace std;
 
 void Item::onSell(){
-    cout << "Sold " << item_name << endl;
+    cout << "Sold " << itemName << endl;
 }

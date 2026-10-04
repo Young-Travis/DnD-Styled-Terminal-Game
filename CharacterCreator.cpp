@@ -34,7 +34,7 @@ void CharacterCreator::handleInput(SDL_Event& event){
                 if (choices.getSelected() == 1){
                     currentStep = CreatorStep::Name;
                     textInput.reset();
-                    choosingName();
+                    chooseName();
                 }
             }
             break;
@@ -43,12 +43,57 @@ void CharacterCreator::handleInput(SDL_Event& event){
             choices.handleInput(event);
             if (event.type == SDL_EVENT_KEY_DOWN && event.key.key == SDLK_RETURN){
                 //class selected
+                switch (choices.getSelected())
+                {
+                    case 0:{
+                        Barbarian c;
+                        playerClass = c;
+                        break;
+                    }
+                    case 1:{
+                        Wizard c;
+                        playerClass = c;
+                        break;
+                    }
+                    case 2:{
+                        Cleric c;
+                        playerClass = c;
+                        break;
+                    }
+                    case 3:{
+                        Fighter c;
+                        playerClass = c;
+                        break;
+                    }
+                    case 4:{
+                        Rogue c;
+                        playerClass = c;
+                        break;
+                    }
+                }
+                currentStep = CreatorStep::VerifyClass;
+                verifyClass();
+            }
+            break;
+        
+        case CreatorStep::VerifyClass:
+            choices.handleInput(event);
+            if (event.type == SDL_EVENT_KEY_DOWN && event.key.key == SDLK_RETURN){
+                if (choices.getSelected() == 0){
+                    currentStep = CreatorStep::Finished;
+                    cout << "Finished" << endl;
+                }
+                if (choices.getSelected() == 1){
+                    currentStep = CreatorStep::ChooseClass;
+                    textInput.reset();
+                    chooseClass();
+                }
             }
             break;
     }
 }
 
-void CharacterCreator::choosingName(){
+void CharacterCreator::chooseName(){
     text.setText("What is your name?", 0, 0);
 }
 
@@ -60,6 +105,11 @@ void CharacterCreator::verifyName(){
 void CharacterCreator::chooseClass(){
     text.setText("What class is " + name + "?", 0, 0);
     choices.setChoices({"Barbarian", "Wizard", "Cleric", "Fighter", "Rogue"}, 200, 200);
+}
+
+void CharacterCreator::verifyClass(){
+    text.setText("So " + name + " is a " + playerClass.className + "?", 0, 0);
+    choices.setChoices({"Yes", "No"}, 200, 200);
 }
 
 void CharacterCreator::update(){
@@ -74,6 +124,8 @@ void CharacterCreator::update(){
         case CreatorStep::ChooseClass:
             text.update();
             break;
+        case CreatorStep::VerifyClass:
+            text.update();
     }
 
 }
@@ -92,6 +144,9 @@ void CharacterCreator::draw(){
             choices.draw();
             text.draw();
             break;
+        case CreatorStep::VerifyClass:
+            choices.draw();
+            text.draw();
     }
 }
 

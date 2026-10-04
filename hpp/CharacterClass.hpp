@@ -5,49 +5,49 @@
 #include <vector>
 using namespace std;
 
-class Character_class{
+class CharacterClass{
 public:
-    string class_name;
-    vector<int> base_stats = {1,1,1,1,1,1};
+    string className;
+    vector<int> baseStats = {1,1,1,1,1,1};
 };
 
-class Barbarian : public Character_class{
+class Barbarian : public CharacterClass{
 public:
     Barbarian(){
-        class_name = "Barbarian";
-        base_stats = {15,13,14,8,12,10};
+        className = "Barbarian";
+        baseStats = {15,13,14,8,12,10};
     }
 };
 
-class Wizard : public Character_class{
+class Wizard : public CharacterClass{
 public:
     Wizard(){
-        class_name = "Wizard";
-        base_stats = {8,13,14,15,12,10};
+        className = "Wizard";
+        baseStats = {8,13,14,15,12,10};
     }
 };
 
-class Cleric : public Character_class{
+class Cleric : public CharacterClass{
 public:
     Cleric(){
-        class_name = "Cleric";
-        base_stats = {12,13,14,8,15,10};
+        className = "Cleric";
+        baseStats = {12,13,14,8,15,10};
     }
 };
 
-class Fighter : public Character_class{
+class Fighter : public CharacterClass{
 public:
     Fighter(){
-        class_name = "Fighter";
-        base_stats = {15,13,14,8,12,10};
+        className = "Fighter";
+        baseStats = {15,13,14,8,12,10};
     }
 };
 
-class Rogue : public Character_class{
+class Rogue : public CharacterClass{
 public:
     Rogue(){
-        class_name = "Rogue";
-        base_stats = {8,14,15,13,12,10};
+        className = "Rogue";
+        baseStats = {8,14,15,13,12,10};
     }
 };
 

@@ -11,7 +11,9 @@
 enum class CreatorStep{
     Name,
     VerifyName,
-    ChooseClass
+    ChooseClass,
+    VerifyClass,
+    Finished
 };
 
 class CharacterCreator{
@@ -23,6 +25,7 @@ public:
 
     //character stuff
     string name;
+    CharacterClass playerClass;
 
     GameState requestedState;
 
@@ -34,11 +37,13 @@ public:
 
     void draw();
 
-    void choosingName();
+    void chooseName();
 
     void verifyName();
 
     void chooseClass();
+
+    void verifyClass();
 
 private:
     SDL_Renderer* renderer;
