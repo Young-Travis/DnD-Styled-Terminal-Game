@@ -9,8 +9,9 @@ using namespace std;
 
 Settings::Settings(SDL_Renderer* r) 
 : renderer(r), text(r), choices(r, &text){
-    text.setText("Welcome to the settings!", 0, 0);
-    choices.setChoices({"Text Speed", "Difficulty", "EXIT"}, 50, 50);
+    text.setText("Welcome to the settings!");
+    choices.setPosition(50,50);
+    choices.setChoices({"Text Speed", "Difficulty", "EXIT"});
 }
 
 void Settings::handleInput(SDL_Event& event){

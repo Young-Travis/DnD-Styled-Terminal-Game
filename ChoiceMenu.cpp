@@ -11,34 +11,40 @@ ChoiceMenu::ChoiceMenu(SDL_Renderer* renderer, TextHandler* text)
     y = 0;
 }
 
-void ChoiceMenu::setChoices(const std::vector<std::string>& choices, float x, float y){
+void ChoiceMenu::setChoices(const std::vector<std::string>& choices){
     this->choices = choices;
-
-    this->x = x;
-    this->y = y;
 
     selected = 0;
 }
 
-void ChoiceMenu::handleInput(const SDL_Event& event){
-    if (event.type != SDL_EVENT_KEY_DOWN){
+void ChoiceMenu::setPosition(float x, float y){
+    this->x = x;
+    this->y = y;
+}
+
+void ChoiceMenu::handleInput(const SDL_Event& event)
+{
+    if (event.type != SDL_EVENT_KEY_DOWN)
+    {
         return;
     }
 
-    if (event.key.key == SDLK_UP){
-
+    if (event.key.key == SDLK_UP)
+    {
         selected--;
 
-        if (selected < 0){
+        if (selected < 0)
+        {
             selected = choices.size() - 1;
         }
     }
 
-    if (event.key.key == SDLK_DOWN){
-
+    if (event.key.key == SDLK_DOWN)
+    {
         selected++;
 
-        if (selected >= choices.size()){
+        if (selected >= choices.size())
+        {
             selected = 0;
         }
     }
@@ -54,12 +60,30 @@ void ChoiceMenu::draw()
         255
     );
 
-    float box_height = 40 + (choices.size() * 40);
+    float padding = 4;
+
+    float box_width = 0;
+
+    // Find the width of the longest option
+    for (int i = 0; i < choices.size(); i++)
+    {
+        int width = text->getTextWidth(": " + choices[i]);
+
+        if (width > box_width)
+        {
+            box_width = width;
+        }
+    }
+
+    // Add equal padding to both sides
+    box_width += padding * 2;
+
+    float box_height = 8 + (choices.size() * 12);
 
     SDL_FRect box = {
         x,
         y,
-        200,
+        box_width,
         box_height
     };
 
@@ -68,19 +92,23 @@ void ChoiceMenu::draw()
         &box
     );
 
-    for (int i = 0; i < choices.size(); i++){
+    for (int i = 0; i < choices.size(); i++)
+    {
         std::string prefix;
-        if (i == selected){
-            prefix = ": ";
+
+        if (i == selected)
+        {
+            prefix = "> ";
         }
-        else {
+        else
+        {
             prefix = "  ";
         }
 
         text->drawInstant(
             prefix + choices[i],
-            x + 20,
-            y + 20 + (i * 40)
+            x + padding,
+            y + 4 + (i * 12)
         );
     }
 }

@@ -6,13 +6,18 @@
 
 using namespace std;
 
-TextInput::TextInput(SDL_Renderer* r, float x_pos, float y_pos): renderer(r), textHandler(r){
-    x = x_pos;
-    y = y_pos;
+TextInput::TextInput(SDL_Renderer* r): renderer(r), textHandler(r){
+    x = 0;
+    y = 0;
 }
 
 void TextInput::update(){
 
+}
+
+void TextInput::setPosition(float x, float y){
+    this->x = x;
+    this->y = y;
 }
 
 void TextInput::draw(){

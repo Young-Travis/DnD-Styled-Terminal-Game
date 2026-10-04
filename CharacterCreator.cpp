@@ -6,8 +6,12 @@
 
 using namespace std;
 
-CharacterCreator::CharacterCreator(SDL_Renderer* r) : renderer(r), text(r), choices(r, &text), textInput(r, 200, 200){
-    text.setText("Welcome to the world!\nThis is where you start your adventure.\nNow tell me,\nwhat is your name?", 0, 0);
+CharacterCreator::CharacterCreator(SDL_Renderer* r) : renderer(r), text(r), choices(r, &text), textInput(r), wizardImage(r){
+    text.setText("Welcome to the world!\nThis is where you start your adventure.\nNow tell me,\nwhat is your name?");
+    wizardImage.load("Assets/Francis_Wizard.png");
+    textInput.setPosition(40, 40);
+    wizardImage.setPosition(80, 40);
+    wizardImage.setSize(64, 64);
 }
 
 void CharacterCreator::handleInput(SDL_Event& event){
@@ -94,22 +98,25 @@ void CharacterCreator::handleInput(SDL_Event& event){
 }
 
 void CharacterCreator::chooseName(){
-    text.setText("What is your name?", 0, 0);
+    text.setText("What is your name?");
 }
 
 void CharacterCreator::verifyName(){
-    text.setText("So your name is " + name + "?", 0, 0);
-    choices.setChoices({"Yes", "No"}, 200, 200);
+    text.setText("So your name is " + name + "?");
+    choices.setPosition(40, 55);
+    choices.setChoices({"Yes", "No"});
 }
 
 void CharacterCreator::chooseClass(){
-    text.setText("What class is " + name + "?", 0, 0);
-    choices.setChoices({"Barbarian", "Wizard", "Cleric", "Fighter", "Rogue"}, 200, 200);
+    text.setText("What class is " + name + "?");
+    choices.setPosition(35,35);
+    choices.setChoices({"Barbarian", "Wizard", "Cleric", "Fighter", "Rogue"});
 }
 
 void CharacterCreator::verifyClass(){
-    text.setText("So " + name + " is a " + playerClass.className + "?", 0, 0);
-    choices.setChoices({"Yes", "No"}, 200, 200);
+    text.setText("So " + name + " is a " + playerClass.className + "?");
+    choices.setPosition(40,55);
+    choices.setChoices({"Yes", "No"});
 }
 
 void CharacterCreator::update(){
@@ -127,10 +134,11 @@ void CharacterCreator::update(){
         case CreatorStep::VerifyClass:
             text.update();
     }
-
 }
 
 void CharacterCreator::draw(){
+    wizardImage.draw();
+
     switch (currentStep){
         case CreatorStep::Name:
             text.draw();

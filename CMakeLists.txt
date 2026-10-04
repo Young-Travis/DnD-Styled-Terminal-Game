@@ -7,6 +7,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(SDL3 REQUIRED CONFIG)
 find_package(SDL3_ttf REQUIRED CONFIG)
+find_package(SDL3_image REQUIRED CONFIG)
 
 add_executable(DnDGame
     Armor.cpp
@@ -20,6 +21,7 @@ add_executable(DnDGame
     main.cpp
     npc.cpp
     Settings.cpp
+    Sprite.cpp
     TextHandler.cpp
     TextInput.cpp
     Weapon.cpp
@@ -28,4 +30,5 @@ add_executable(DnDGame
 target_link_libraries(DnDGame PRIVATE
     SDL3::SDL3
     SDL3_ttf::SDL3_ttf
+    SDL3_image
 )

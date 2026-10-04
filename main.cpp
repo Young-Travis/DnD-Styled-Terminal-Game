@@ -26,6 +26,8 @@ int main(){
 
     SDL_Renderer* renderer = SDL_CreateRenderer(window, nullptr);
 
+    SDL_SetRenderLogicalPresentation(renderer, 160, 144, SDL_LOGICAL_PRESENTATION_INTEGER_SCALE);
+
     if (renderer == nullptr){
         cout << "SDL_CreateRenderer failed: " << SDL_GetError() << endl;
         SDL_DestroyWindow(window);

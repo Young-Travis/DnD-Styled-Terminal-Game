@@ -1,33 +1,35 @@
 #include "hpp/TextHandler.hpp"
 #include <iostream>
 
+using namespace std;
+
 TextHandler::TextHandler(SDL_Renderer* renderer){
     this->renderer = renderer;
 
     if (!TTF_Init()){
-        std::cout << "TTF_Init failed: "
+        cout << "TTF_Init failed: "
                   << SDL_GetError()
-                  << std::endl;
+                  << endl;
 
         font = nullptr;
         return;
     }
 
-    std::cout << "SDL_ttf initialized successfully." << std::endl;
+    cout << "SDL_ttf initialized successfully." << endl;
 
-    font = TTF_OpenFont("font.ttf", 32);
+    font = TTF_OpenFont("font.ttf", 8);
 
     if (font == nullptr){
-        std::cout << "TTF_OpenFont failed: " << SDL_GetError() << std::endl;
+        cout << "TTF_OpenFont failed: " << SDL_GetError() << endl;
     }
     else {
-        std::cout << "Font loaded successfully." << std::endl;
+        cout << "Font loaded successfully." << endl;
     }
 
     current_text = "";
 
-    text_x = 0;
-    text_y = 0;
+    x = 0;
+    y = 0;
 
     characters_to_show = 0;
 
@@ -44,19 +46,37 @@ TextHandler::~TextHandler(){
     TTF_Quit();
 }
 
-void TextHandler::setText(const std::string& text, float x, float y){
+int TextHandler::getTextWidth(const string& text)
+{
+    if (font == nullptr){
+        return 0;
+    }
+
+    int width = 0;
+    int height = 0;
+
+    if (!TTF_GetStringSize(font, text.c_str(), text.length(), &width, &height)){
+        return 0;
+    }
+
+    return width;
+}
+
+void TextHandler::setText(const string& text){
     if (font == nullptr){
         return;
     }
 
     current_text = text;
 
-    text_x = x;
-    text_y = y;
-
     characters_to_show = 0;
 
     last_character_time = SDL_GetTicks();
+}
+
+void TextHandler::setPosition(float x, float y){
+    this->x = x;
+    this->y = y;
 }
 
 void TextHandler::update(){
@@ -72,7 +92,7 @@ void TextHandler::update(){
     }
 }
 
-void TextHandler::drawLine(const std::string& text, float x, float y){
+void TextHandler::drawLine(const string& text, float x, float y){
     if (text.empty()){
         return;
     }
@@ -85,7 +105,7 @@ void TextHandler::drawLine(const std::string& text, float x, float y){
     };
 
     SDL_Surface* surface =
-        TTF_RenderText_Blended(
+        TTF_RenderText_Solid(
             font,
             text.c_str(),
             text.length(),
@@ -109,6 +129,8 @@ void TextHandler::drawLine(const std::string& text, float x, float y){
         return;
     }
 
+    SDL_SetTextureScaleMode(texture, SDL_SCALEMODE_NEAREST);
+
     SDL_FRect destination = {
         x,
         y,
@@ -127,7 +149,7 @@ void TextHandler::drawLine(const std::string& text, float x, float y){
     SDL_DestroySurface(surface);
 }
 
-void TextHandler::drawInstant(const std::string& text, float x, float y){
+void TextHandler::drawInstant(const string& text, float x, float y){
     if (font == nullptr){
         return;
     }
@@ -140,15 +162,15 @@ void TextHandler::draw(){
         return;
     }
 
-    std::string visible_text =
+    string visible_text =
         current_text.substr(
             0,
             characters_to_show
         );
 
-    float current_y = text_y;
+    float current_y = y;
 
-    std::string current_line;
+    string current_line;
 
     for (char character : visible_text){
 
@@ -156,13 +178,13 @@ void TextHandler::draw(){
 
             drawLine(
                 current_line,
-                text_x,
+                x,
                 current_y
             );
 
             current_line = "";
 
-            current_y += 40;
+            current_y += 10;
         }
         else {
 
@@ -172,7 +194,7 @@ void TextHandler::draw(){
 
     drawLine(
         current_line,
-        text_x,
+        x,
         current_y
     );
 }

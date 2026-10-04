@@ -5,6 +5,8 @@
 #include <SDL3_ttf/SDL_ttf.h>
 #include <string>
 
+using namespace std;
+
 class TextHandler {
 
 private:
@@ -12,10 +14,10 @@ private:
     SDL_Renderer* renderer;
     TTF_Font* font;
 
-    std::string current_text;
+    string current_text;
 
-    float text_x;
-    float text_y;
+    float x;
+    float y;
 
     int characters_to_show;
 
@@ -24,7 +26,7 @@ private:
     int character_delay;
 
     void drawLine(
-        const std::string& text,
+        const string& text,
         float x,
         float y
     );
@@ -35,11 +37,15 @@ public:
 
     ~TextHandler();
 
-    void setText(const std::string& text, float x, float y);
+    int getTextWidth(const string& text);
+
+    void setText(const string& text);
+
+    void setPosition(float x, float y);
 
     void draw();
 
-    void drawInstant(const std::string& text, float x, float y);
+    void drawInstant(const string& text, float x, float y);
 
     void update();
 

@@ -24,7 +24,9 @@ public:
 
     ChoiceMenu(SDL_Renderer* renderer, TextHandler* text);
 
-    void setChoices(const std::vector<std::string>& choices, float x, float y);
+    void setChoices(const std::vector<std::string>& choices);
+
+    void setPosition(float x, float y);
 
     void handleInput(const SDL_Event& event);
 

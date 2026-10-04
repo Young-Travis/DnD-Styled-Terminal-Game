@@ -19,9 +19,11 @@ public:
 
     int maxLength = 16;
 
-    TextInput(SDL_Renderer* r, float x, float y);
+    TextInput(SDL_Renderer* r);
 
     void handleInput(SDL_Event& event);
+
+    void setPosition(float x, float y);
 
     void update();
 

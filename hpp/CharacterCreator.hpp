@@ -7,6 +7,7 @@
 #include "ChoiceMenu.hpp"
 #include "TextHandler.hpp"
 #include "TextInput.hpp"
+#include "Sprite.hpp"
 
 enum class CreatorStep{
     Name,
@@ -22,6 +23,7 @@ public:
     ChoiceMenu choices;
     TextHandler text;
     TextInput textInput;
+    Sprite wizardImage;
 
     //character stuff
     string name;

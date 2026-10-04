@@ -4,3 +4,5 @@ Strength
 Intelligence
 Wisdom
 Charisma
+
+Screen is 160 x 144
